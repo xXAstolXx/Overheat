@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,18 +7,24 @@ public class Building : MonoBehaviour
 {
     [SerializeField]
     private BuildingsData buildingData;
+
+    [SerializeField]
+    private ResourceType coolingResourceType;
+    [SerializeField]
+    private int ticks; 
     private SpriteRenderer sprite;
     private bool isGenerating;
-    private CircleCollider2D innerCollider;
-    [SerializeField]
     private CircleCollider2D outerCollider;
+    [SerializeField]
+    private CircleCollider2D innerCollider;
 
+    private float currentHeat = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
-        innerCollider = GetComponent<CircleCollider2D>();
+        outerCollider = GetComponent<CircleCollider2D>();
         outerCollider = GetComponentInChildren<CircleCollider2D>();
         Debug.Log($"Type of The Building: {buildingData.name}");
         Debug.Log($"Name of The Building: {buildingData.ObjectName}");
@@ -26,10 +33,11 @@ public class Building : MonoBehaviour
         {
             case BUILDINGTYPE.RESSOURCE:
             sprite.color = buildingData.RessourceBuildingColor;
-            TickSystem(30);
+            TickSystem(ticks);
             break;
             case BUILDINGTYPE.MONUMENT:
             sprite.color = buildingData.MonumentBuildingColor;
+            TickSystem(ticks);
             break;
             case BUILDINGTYPE.WARFARE:
             sprite.color = buildingData.WarfareBuildingColor;
@@ -47,10 +55,24 @@ public class Building : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if(other.gameObject.GetComponent<PlayerController>().backPack.ressourceDatas[0].Type != coolingResourceType)
+        {
+           return;
+        }
+        else
+        {
+            Interact(other);
+        }
+    }
+
+    private void Interact(Collider2D other)
+    {
+        float itemCoolingValue = other.gameObject.GetComponent<PlayerController>().backPack.ressourceDatas[0].Amount;
+        currentHeat = Mathf.Clamp(itemCoolingValue,0,itemCoolingValue);
+        other.gameObject.GetComponent<PlayerController>().backPack.ressourceDatas.RemoveAt(0);
+        Destroy(other.gameObject.GetComponent<PlayerController>().backPack.transform.GetChild(0).gameObject);
     }
 
     private void TickSystem( int ticksToGenerate)
@@ -91,13 +113,13 @@ public class Building : MonoBehaviour
 
     private int ResourceResult(int amount)
     {
-       int result = amount *= 2 ;
+       int result = amount;
        return result;
     }
 
     private Vector3 GenerateRandomPosition()
     {
-        float minRadius = innerCollider.radius;
+        float minRadius = outerCollider.radius;
         float maxRadius = outerCollider.radius;
         Debug.Log("min radius: " + minRadius);
         Debug.Log("max radius: " + maxRadius);

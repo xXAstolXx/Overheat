@@ -33,8 +33,6 @@ public class BuildingsData : ScriptableObject
 
 
     public string ObjectName{get{return objectName;}}
-    // public int GenerationTick{get{return genTick;}}
-    // public int GenerationTickMax{get{return genTickMax;}}
     #region BuildingColors
     public Color RessourceBuildingColor{get{return ressourceBuildingColor;}}
     public Color MonumentBuildingColor{get{return monumentBuildingColor;}}
