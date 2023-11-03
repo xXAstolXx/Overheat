@@ -6,18 +6,8 @@ public class Building : MonoBehaviour
 {
     [SerializeField]
     private BuildingsData buildingData;
-
-    [SerializeField]
-    private float maxRadius;
-
     private SpriteRenderer sprite;
-
-
-    private int genTick;
-    private int genTickMax;
-
     private bool isGenerating;
-
     private CircleCollider2D innerCollider;
     [SerializeField]
     private CircleCollider2D outerCollider;
