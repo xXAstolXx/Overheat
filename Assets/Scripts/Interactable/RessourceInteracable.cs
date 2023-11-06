@@ -28,6 +28,7 @@ public class RessourceInteracable : MonoBehaviour
         gameObject.transform.localPosition = new Vector3(0,0,0); 
         transform.SetParent(target.GetComponentInChildren<BackPack>().gameObject.transform, false);
         target.gameObject.GetComponentInChildren<BackPack>().ressourceDatas.Add(data);
+        gameObject.transform.localScale = new Vector3(0.5f,0.5f,1);
         //target.gameObject.GetComponent<PlayerController>().backPack.item = this.gameObject;
         Debug.Log("!!!inetracted!!!");
     }
