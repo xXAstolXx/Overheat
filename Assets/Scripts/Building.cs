@@ -20,7 +20,6 @@ public class Building : MonoBehaviour
 
     private float currentHeat = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -52,6 +51,7 @@ public class Building : MonoBehaviour
     {
         var player = other.gameObject.GetComponent<Player>();
         if(player == null){return;}
+        
         int itemCoolingValue = player.GetResourceDataAmountFromBackPack();
         player.TryInteract(coolingResourceType);
         Debug.LogWarning($"itemcoolingValue: {itemCoolingValue.ToString()}");
