@@ -17,10 +17,11 @@ public class RessourceInteracable : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(!other.gameObject.CompareTag("Player")){return;}
-        if(other.gameObject.GetComponentInChildren<BackPack>().ressourceDatas.Count >= 1){return;}
-        Interact(other.gameObject);
-        Debug.Log($"interacted WhO: {other.gameObject.name}");
+        var collector = other.gameObject.GetComponent<Collector>();
+        if(collector != null)
+        {
+            collector.TryCollect(this, data);
+        }
     }
 
     private void Interact(GameObject target)
@@ -29,7 +30,6 @@ public class RessourceInteracable : MonoBehaviour
         transform.SetParent(target.GetComponentInChildren<BackPack>().gameObject.transform, false);
         target.gameObject.GetComponentInChildren<BackPack>().ressourceDatas.Add(data);
         gameObject.transform.localScale = new Vector3(0.5f,0.5f,1);
-        //target.gameObject.GetComponent<PlayerController>().backPack.item = this.gameObject;
         Debug.Log("!!!inetracted!!!");
     }
 }

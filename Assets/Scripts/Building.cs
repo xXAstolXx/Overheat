@@ -25,9 +25,7 @@ public class Building : MonoBehaviour
     {
         sprite = GetComponent<SpriteRenderer>();
         outerCollider = GetComponent<CircleCollider2D>();
-        outerCollider = GetComponentInChildren<CircleCollider2D>();
-        Debug.Log($"Type of The Building: {buildingData.name}");
-        Debug.Log($"Name of The Building: {buildingData.ObjectName}");
+        innerCollider = GetComponentInChildren<CircleCollider2D>();
 
         switch (buildingData.BuildingType)
         {
@@ -47,32 +45,22 @@ public class Building : MonoBehaviour
             break;
 
         }
-
-        // TimeTickSystem.OnTick += delegate (object sender, TimeTickSystem.OnTickEventArgs e)
-        // {
-        //     Debug.Log($"tick: {e.tick}");
-        // };
         
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.GetComponent<PlayerController>().backPack.ressourceDatas[0].Type != coolingResourceType)
-        {
-           return;
-        }
-        else
-        {
-            Interact(other);
-        }
+        var player = other.gameObject.GetComponent<Player>();
+        if(player == null){return;}
+        int itemCoolingValue = player.GetResourceDataAmountFromBackPack();
+        player.TryInteract(coolingResourceType);
+        Debug.LogWarning($"itemcoolingValue: {itemCoolingValue.ToString()}");
+        ResetOverHeating(itemCoolingValue); 
     }
 
-    private void Interact(Collider2D other)
+    private void ResetOverHeating(int coolingValue)
     {
-        float itemCoolingValue = other.gameObject.GetComponent<PlayerController>().backPack.ressourceDatas[0].Amount;
-        currentHeat = Mathf.Clamp(itemCoolingValue,0,itemCoolingValue);
-        other.gameObject.GetComponent<PlayerController>().backPack.ressourceDatas.RemoveAt(0);
-        Destroy(other.gameObject.GetComponent<PlayerController>().backPack.transform.GetChild(0).gameObject);
+        currentHeat = Mathf.Clamp(coolingValue,0,coolingValue);
     }
 
     private void TickSystem( int ticksToGenerate)
@@ -88,9 +76,9 @@ public class Building : MonoBehaviour
         if(isGenerating)
         {
             buildingData.GenTick += 1;
-            var test = ResourceResult(buildingData.Amount);
+            var result = ResourceResult(buildingData.Amount);
             var instatiatedPrefab = 0;
-            for(int i = 0; i < test; i++)
+            for(int i = 0; i < result; i++)
             {
                 InstantiateResourcePrefab();
                 instatiatedPrefab += buildingData.GenTick;
@@ -101,7 +89,7 @@ public class Building : MonoBehaviour
             }
             
             Debug.Log($"genTick: {buildingData.GenTick}");
-            Debug.Log($"Resource Amount Generated: {test}");
+            Debug.Log($"Resource Amount Generated: {result}");
             Debug.Log($"instatedPrefab: {instatiatedPrefab}");
         }
     }
@@ -119,10 +107,8 @@ public class Building : MonoBehaviour
 
     private Vector3 GenerateRandomPosition()
     {
-        float minRadius = outerCollider.radius;
+        float minRadius = innerCollider.radius;
         float maxRadius = outerCollider.radius;
-        Debug.Log("min radius: " + minRadius);
-        Debug.Log("max radius: " + maxRadius);
         float randomAngle = Random.Range(0f,360f);
         float randomRadius = Random.Range(minRadius,maxRadius);
         Vector3 resultVector = new Vector3(Mathf.Cos(randomAngle)*randomRadius+transform.position.x,Mathf.Sin(randomAngle)*randomRadius+transform.position.y,0f);
