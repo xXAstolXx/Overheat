@@ -5,6 +5,7 @@ public class OverheatImage : MonoBehaviour
 {
     private Image image;
 
+    public float OverHeatAmount{get{return image.fillAmount;}}
 
     private void Start() 
     {

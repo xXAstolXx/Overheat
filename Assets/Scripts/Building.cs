@@ -27,12 +27,15 @@ public class Building : MonoBehaviour
     [SerializeField]
     private float overheatingPerTick = 0.1f;
 
+    private OverheatImage overheatImage;
+
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
         outerCollider = GetComponent<CircleCollider2D>();
         innerCollider = GetComponentInChildren<CircleCollider2D>();
         overheatCanvas = GetComponentInChildren<OverheatCanvas>();
+        overheatImage = GetComponentInChildren<OverheatImage>();
 
         switch (buildingData.BuildingType)
         {
@@ -54,6 +57,13 @@ public class Building : MonoBehaviour
 
         }
         
+        
+        
+    }
+    private void Update() 
+    {
+        currentHeat = overheatCanvas.GetOverHeatAmount();
+        Debug.Log($"current Heat: {currentHeat}");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -69,7 +79,7 @@ public class Building : MonoBehaviour
 
     private void ResetOverHeating(int coolingValue)
     {
-        currentHeat = Mathf.Clamp(coolingValue,0,coolingValue);
+        // currentHeat = Mathf.Clamp(coolingValue,0,coolingValue);
     }
 
     private void TickSystem( int ticksToGenerate)

@@ -15,4 +15,9 @@ public class OverheatCanvas : MonoBehaviour
     {
         overheatImage.IncreaseOverheating(amount);
     }
+
+    public float GetOverHeatAmount()
+    {
+        return overheatImage.OverHeatAmount;
+    }
 }
