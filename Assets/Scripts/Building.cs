@@ -12,19 +12,27 @@ public class Building : MonoBehaviour
     private ResourceType coolingResourceType;
     [SerializeField]
     private int ticks; 
+
+    [SerializeField]
+    private Gradient overHeatGradient;   
     private SpriteRenderer sprite;
     private bool isGenerating;
     private CircleCollider2D outerCollider;
     [SerializeField]
     private CircleCollider2D innerCollider;
 
+    private OverheatCanvas overheatCanvas;
     private float currentHeat = 0;
+
+    [SerializeField]
+    private float overheatingPerTick = 0.1f;
 
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
         outerCollider = GetComponent<CircleCollider2D>();
         innerCollider = GetComponentInChildren<CircleCollider2D>();
+        overheatCanvas = GetComponentInChildren<OverheatCanvas>();
 
         switch (buildingData.BuildingType)
         {
@@ -38,6 +46,7 @@ public class Building : MonoBehaviour
             break;
             case BUILDINGTYPE.WARFARE:
             sprite.color = buildingData.WarfareBuildingColor;
+            TickSystem(ticks);
             break;
             case BUILDINGTYPE.NONE:
             sprite.color = Color.magenta;
@@ -82,6 +91,7 @@ public class Building : MonoBehaviour
             {
                 InstantiateResourcePrefab();
                 instatiatedPrefab += buildingData.GenTick;
+                OverHeating(overheatingPerTick);
             }
             if(buildingData.GenTick >= buildingData.GenTickMax)
             {
@@ -92,6 +102,11 @@ public class Building : MonoBehaviour
             Debug.Log($"Resource Amount Generated: {result}");
             Debug.Log($"instatedPrefab: {instatiatedPrefab}");
         }
+    }
+
+    private void OverHeating(float amount)
+    {
+        overheatCanvas.IncreaseOverheating(amount);
     }
 
     private void InstantiateResourcePrefab()
