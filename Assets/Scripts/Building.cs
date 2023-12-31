@@ -25,10 +25,11 @@ public class Building : MonoBehaviour
     private float currentHeat = 0;
 
     [SerializeField]
-    private float overheatingPerTick = 0.1f;
+    private float overheatingPerTick;
 
     private OverheatImage overheatImage;
 
+    private bool isOverheated = false;
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -56,14 +57,15 @@ public class Building : MonoBehaviour
             break;
 
         }
-        
-        
+
+        AddItems();
         
     }
     private void Update() 
     {
         currentHeat = overheatCanvas.GetOverHeatAmount();
         Debug.Log($"current Heat: {currentHeat}");
+        Game.Instance.GameOver();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -84,10 +86,10 @@ public class Building : MonoBehaviour
 
     private void TickSystem( int ticksToGenerate)
     {
+        TimeTickSystem.OnTick += TimeTickSystem_OnTick;
         buildingData.GenTick = 0;
         buildingData.GenTickMax = ticksToGenerate;
         isGenerating = true;
-        TimeTickSystem.OnTick += TimeTickSystem_OnTick;
     }
 
     private void TimeTickSystem_OnTick(object sender, TimeTickSystem.OnTickEventArgs e)
@@ -101,19 +103,34 @@ public class Building : MonoBehaviour
             {
                 InstantiateResourcePrefab();
                 instatiatedPrefab += buildingData.GenTick;
+                overheatingPerTick = (float)buildingData.GenTick / 10;
                 OverHeating(overheatingPerTick);
             }
-            if(buildingData.GenTick >= buildingData.GenTickMax)
+            if(currentHeat >= 1)
             {
                 isGenerating = false;
+                ModifyItems();
             }
             
             Debug.Log($"genTick: {buildingData.GenTick}");
             Debug.Log($"Resource Amount Generated: {result}");
             Debug.Log($"instatedPrefab: {instatiatedPrefab}");
+            Debug.Log($"overheatingPerTick: {overheatingPerTick}");
         }
     }
 
+    private void AddItems()
+    {
+        var test = Game.Instance.overheatedBuildings;
+        test.Add(isOverheated);
+        Debug.Log(test[test.Count - 1].ToString());
+    }
+    private void ModifyItems()
+    {
+        var test = Game.Instance.overheatedBuildings;
+        test.RemoveAt(test.Count - 1);
+        Debug.Log(test.Count.ToString());
+    }
     private void OverHeating(float amount)
     {
         overheatCanvas.IncreaseOverheating(amount);
