@@ -13,9 +13,6 @@ public class BuildingsData : ScriptableObject
     private int genTickMax;
 
     [SerializeField]
-    private string objectName;
-
-    [SerializeField]
     private Color ressourceBuildingColor;
     [SerializeField]
     private Color monumentBuildingColor;
@@ -31,18 +28,20 @@ public class BuildingsData : ScriptableObject
     [SerializeField,Range(0,10)]
     private int amount;
 
+    [SerializeField]
+    private float overHeatingPerTick;
 
-    public string ObjectName{get{return objectName;}}
     #region BuildingColors
     public Color RessourceBuildingColor{get{return ressourceBuildingColor;}}
     public Color MonumentBuildingColor{get{return monumentBuildingColor;}}
     public Color WarfareBuildingColor{get{return warfareBuildingColor;}}
     #endregion BuildingColors
-    public BUILDINGTYPE BuildingType{get{return buildingType;}}
-    public int Amount{get{return amount;}}
-    public GameObject ItemPrefab{get{return itemPrefab;}}
+    public BUILDINGTYPE BuildingType{ get => buildingType; }
+    public int Amount{ get => amount; }
+    public GameObject ItemPrefab{get => itemPrefab;}
     public int GenTick{get{return genTick;} set{genTick = value;}}
-    public int GenTickMax{get{return genTickMax;} set {genTickMax = value;}}
+    public int GenTickMax{ get => genTickMax; set { genTickMax = value; } }
+    public float OverHeatingPerTick { get => overHeatingPerTick; }
 
 
 }
