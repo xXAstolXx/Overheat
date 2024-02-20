@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -21,7 +18,7 @@ public class Game : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
     }
@@ -30,7 +27,6 @@ public class Game : MonoBehaviour
     {
         foreach (Building building in buildings)
         {
-            Debug.Log(building.isOverheated);
             if(building.isOverheated == false)
             {
                 return;
@@ -43,5 +39,10 @@ public class Game : MonoBehaviour
     public void GameOver()
     {
         Debug.LogWarning("GameOver all Buildings Overheated");
+    }
+
+    public void GameWon()
+    {
+        Debug.LogWarning("You have won");
     }
 }

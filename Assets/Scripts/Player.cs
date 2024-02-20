@@ -66,13 +66,18 @@ public class Player : Collector
         backPack.DestroyItemInBackPack();
     }
 
-    public int GetResourceDataAmountFromBackPack()
+    public ResourceType GetCoolingRessourceType()
+    {
+        return backPack.ressourceDatas[0].Type;
+    }
+
+    public float GetResourceDataAmountFromBackPack()
     {
         if(backPack.ressourceDatas.Count >= 1)
         {
             return backPack.ressourceDatas[0].Amount;
         }
-        return 0;
+        return 0f;
     }
 
     #endregion

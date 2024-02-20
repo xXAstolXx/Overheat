@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class BackPack : MonoBehaviour
 {   
-    [HideInInspector]
     public List<RessourceData> ressourceDatas = new List<RessourceData>();
 
     public void DestroyItemInBackPack()

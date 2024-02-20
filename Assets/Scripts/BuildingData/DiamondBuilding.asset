@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6f507aacd9baf4b935329ba3b1ba02, type: 3}
   m_Name: DiamondBuilding
   m_EditorClassIdentifier: 
-  objectName: Tempel
   ressourceBuildingColor: {r: 0.29910004, g: 1, b: 0, a: 1}
   monumentBuildingColor: {r: 0, g: 0.6476085, b: 1, a: 1}
   warfareBuildingColor: {r: 0.5889387, g: 0, b: 1, a: 1}
   itemPrefab: {fileID: 7506376046836648590, guid: 13180f076609987479810d5dd54c2556, type: 3}
   buildingType: 20
   amount: 1
+  overHeatingPerTick: 0.1

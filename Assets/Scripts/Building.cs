@@ -64,7 +64,6 @@ public class Building : MonoBehaviour
     private void Update() 
     {
         currentHeat = overheatCanvas.GetOverHeatAmount();
-        Debug.Log($"current Heat: {currentHeat}");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -72,15 +71,18 @@ public class Building : MonoBehaviour
         var player = other.gameObject.GetComponent<Player>();
         if(player == null){return;}
         
-        int itemCoolingValue = player.GetResourceDataAmountFromBackPack();
-        player.TryInteract(coolingResourceType);
-        Debug.LogWarning($"itemcoolingValue: {itemCoolingValue.ToString()}");
-        ResetOverHeating(itemCoolingValue); 
+        float itemCoolingValue = player.GetResourceDataAmountFromBackPack();
+        if (itemCoolingValue > 0f && player.GetCoolingRessourceType() == coolingResourceType)
+        {
+            Debug.LogWarning("reduced overheating");
+            ReduceOverHeating(itemCoolingValue); 
+            player.TryInteract(coolingResourceType);
+        }
     }
 
-    private void ResetOverHeating(int coolingValue)
+    private void ReduceOverHeating(float coolingValue)
     {
-        // currentHeat = Mathf.Clamp(coolingValue,0,coolingValue);
+         overheatCanvas.DecreaseOverheating(coolingValue);
     }
 
     private void TickSystem(int ticksToGenerate)
@@ -109,11 +111,6 @@ public class Building : MonoBehaviour
                 isGenerating = false;
                 isOverheated = true;
             }
-            
-            Debug.Log($"genTick: {buildingData.GenTick}");
-            Debug.Log($"Resource Amount Generated: {result}");
-            Debug.Log($"instatedPrefab: {instatiatedPrefab}");
-            Debug.Log($"overheatingPerTick: {overheatingPerTick}");
         }
     }
 
@@ -146,7 +143,6 @@ public class Building : MonoBehaviour
         float randomAngle = Random.Range(0f,360f);
         float randomRadius = Random.Range(minRadius,maxRadius);
         Vector3 resultVector = new Vector3(Mathf.Cos(randomAngle)*randomRadius+transform.position.x,Mathf.Sin(randomAngle)*randomRadius+transform.position.y,0f);
-        Debug.Log($"result Vector: x {resultVector.x} | y {resultVector.y} | z {resultVector.z}");
         return resultVector;
     }
 }

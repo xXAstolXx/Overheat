@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TRIANGLE
   m_EditorClassIdentifier: 
   resourceType: 0
-  amount: 2
+  amount: 0.5

@@ -19,6 +19,10 @@ public class OverheatImage : MonoBehaviour
 
     public void DecreaseOverheating(float amount)
     {
+        if(amount == 0)
+        {
+            return;
+        }
         image.fillAmount -= amount;
     }
 }
