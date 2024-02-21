@@ -1,7 +1,6 @@
+using Sirenix.OdinInspector;
 using System;
-using System.Runtime;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 
 
@@ -12,33 +11,41 @@ public class BuildingsData : ScriptableObject
 
     private int genTickMax;
 
+    [TabGroup("tab2","Color", TextColor = "lightRed")]
     [SerializeField]
-    private Color ressourceBuildingColor;
+    private Color triangleBuildingColor;
+    [TabGroup("tab2","Color")]
     [SerializeField]
-    private Color monumentBuildingColor;
+    private Color squareBuildingColor;
+    [TabGroup("tab2","Color")]
     [SerializeField]
-    private Color warfareBuildingColor;
+    private Color diamondBuildingColor;
 
+    [TabGroup("tab2","Settings", SdfIconType.GearFill, TextColor = "Orange", TabLayouting = TabLayouting.MultiRow)]
+    [SerializeField]
+    private ResourceType buildingType;
+    [TabGroup("tab2", "Settings")]
     [SerializeField]
     private GameObject itemPrefab;
-    
-    [SerializeField]
-    private BUILDINGTYPE buildingType;
-
-    [SerializeField,Range(0,10)]
-    private int amount;
-
+    [TabGroup("tab2", "Settings")]
+    [SerializeField, Range(0, 10)]
+    private int amountToGenerate;
+    [TabGroup("tab2", "Settings")]
     [SerializeField]
     private float overHeatingPerTick;
+    [TabGroup("tab2", "Settings")]
+    [SerializeField]
+    private int ticks;
 
     #region BuildingColors
-    public Color RessourceBuildingColor{get{return ressourceBuildingColor;}}
-    public Color MonumentBuildingColor{get{return monumentBuildingColor;}}
-    public Color WarfareBuildingColor{get{return warfareBuildingColor;}}
+    public Color TriangleBuildingColor{get{return triangleBuildingColor;}}
+    public Color SquareBuildingColor{get{return squareBuildingColor;}}
+    public Color DiamondBuildingColor{get{return diamondBuildingColor;}}
     #endregion BuildingColors
-    public BUILDINGTYPE BuildingType{ get => buildingType; }
-    public int Amount{ get => amount; }
+    public ResourceType BuildingType{ get => buildingType; }
+    public int AmountToGenerate{ get => amountToGenerate; }
     public GameObject ItemPrefab{get => itemPrefab;}
+    public int Ticks { get => ticks; }
     public int GenTick{get{return genTick;} set{genTick = value;}}
     public int GenTickMax{ get => genTickMax; set { genTickMax = value; } }
     public float OverHeatingPerTick { get => overHeatingPerTick; }

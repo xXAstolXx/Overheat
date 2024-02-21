@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6f507aacd9baf4b935329ba3b1ba02, type: 3}
   m_Name: TriangleBuilding
   m_EditorClassIdentifier: 
-  ressourceBuildingColor: {r: 0.29910004, g: 1, b: 0, a: 1}
-  monumentBuildingColor: {r: 0.08962262, g: 0.98412293, b: 1, a: 1}
-  warfareBuildingColor: {r: 1, g: 0, b: 0.15225315, a: 1}
-  itemPrefab: {fileID: 245171423998952342, guid: 965cc1e26e1b1e343a1fbfe74be5003e, type: 3}
+  triangleBuildingColor: {r: 0.052918315, g: 1, b: 0, a: 1}
+  squareBuildingColor: {r: 0, g: 0.5905471, b: 1, a: 1}
+  diamondBuildingColor: {r: 0.78084564, g: 0, b: 1, a: 1}
   buildingType: 0
-  amount: 1
+  itemPrefab: {fileID: 245171423998952342, guid: 965cc1e26e1b1e343a1fbfe74be5003e, type: 3}
+  amountToGenerate: 1
   overHeatingPerTick: 0.1
+  ticks: 60

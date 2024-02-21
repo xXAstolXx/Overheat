@@ -35,7 +35,7 @@ public class Player : Collector
 
     }
 
-    public override void Collect(GameObject target, RessourceData data)
+    protected override void Collect(GameObject target, RessourceData data)
     {
         backPack.ressourceDatas.Add(data);
         TransformTarget(target);

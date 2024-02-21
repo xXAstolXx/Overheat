@@ -1,5 +1,4 @@
 using System;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,12 +8,8 @@ public class Building : MonoBehaviour
     private BuildingsData buildingData;
 
     [SerializeField]
-    private ResourceType coolingResourceType;
-    [SerializeField]
-    private int ticks; 
+    private ResourceType coolingResourceType; 
 
-    [SerializeField]
-    private Gradient overHeatGradient;   
     private SpriteRenderer sprite;
     private bool isGenerating;
     private CircleCollider2D outerCollider;
@@ -22,14 +17,11 @@ public class Building : MonoBehaviour
     private CircleCollider2D innerCollider;
 
     private OverheatCanvas overheatCanvas;
-    private float currentHeat = 0;
-
     [SerializeField]
-    private float overheatingPerTick;
-
+    private float currentHeat = 0;
     private OverheatImage overheatImage;
-
     public bool isOverheated { get; private set; }
+
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -40,21 +32,22 @@ public class Building : MonoBehaviour
         isOverheated = false;
         switch (buildingData.BuildingType)
         {
-            case BUILDINGTYPE.RESSOURCE:
-            sprite.color = buildingData.RessourceBuildingColor;
-            TickSystem(ticks);
+            case ResourceType.TRIANGLE:
+            sprite.color = buildingData.TriangleBuildingColor;
+            TickSystem(buildingData.Ticks);
             break;
-            case BUILDINGTYPE.MONUMENT:
-            sprite.color = buildingData.MonumentBuildingColor;
-            TickSystem(ticks);
+            case ResourceType.SQUARE:
+            sprite.color = buildingData.SquareBuildingColor;
+            TickSystem(buildingData.Ticks);
             break;
-            case BUILDINGTYPE.WARFARE:
-            sprite.color = buildingData.WarfareBuildingColor;
-            TickSystem(ticks);
+            case ResourceType.DIAMOND:
+            sprite.color = buildingData.DiamondBuildingColor;
+            TickSystem(buildingData.Ticks);
             break;
-            case BUILDINGTYPE.NONE:
+            default:
+            case ResourceType.NONE:
             sprite.color = Color.magenta;
-            break;
+            throw new NotImplementedException("none BuildingData Assigned");
 
         }
 
@@ -98,7 +91,7 @@ public class Building : MonoBehaviour
         if(isGenerating)
         {
             buildingData.GenTick += 1;
-            var result = ResourceResult(buildingData.Amount);
+            var result = ResourceResult(buildingData.AmountToGenerate);
             var instatiatedPrefab = 0;
             for(int i = 0; i < result; i++)
             {
@@ -111,6 +104,12 @@ public class Building : MonoBehaviour
                 isGenerating = false;
                 isOverheated = true;
             }
+
+        }
+        if (isOverheated == true && currentHeat < 1)
+        {
+            isGenerating = true;
+            isOverheated = false;
         }
     }
 
@@ -122,7 +121,7 @@ public class Building : MonoBehaviour
 
     private void OverHeating()
     {
-        overheatCanvas.IncreaseOverheating(overheatingPerTick);
+        overheatCanvas.IncreaseOverheating(buildingData.OverHeatingPerTick);
     }
 
     private void InstantiateResourcePrefab()

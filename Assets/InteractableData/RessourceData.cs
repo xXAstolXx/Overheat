@@ -1,4 +1,3 @@
-using System.Data;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Resource Data", menuName = "BuildingObjects/Resource Data ", order = 2)]

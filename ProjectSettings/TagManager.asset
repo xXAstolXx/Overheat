@@ -44,6 +44,9 @@ TagManager:
   - name: Building
     uniqueID: 349910213
     locked: 0
+  - name: Buttons
+    uniqueID: 2274365965
+    locked: 0
   - name: Player
     uniqueID: 23194109
     locked: 0
