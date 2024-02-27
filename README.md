@@ -1,4 +1,4 @@
 # Tactical 
-![alt text](TacticalBanner.png)
+![Tactical Banner](TacticalBanner.png)
 
 # Overview
