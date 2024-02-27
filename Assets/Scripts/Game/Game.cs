@@ -62,14 +62,12 @@ public class Game : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.LogWarning("GameOver all Buildings Overheated");
         gameOverMenu.ShowScreen();
         SetTimescale(0f);
     }
 
     public void GameWon()
     {
-        Debug.LogWarning("You have won");
         CalculateScore();
         winMenu.ShowScreen();
         SetTimescale(0f);
