@@ -11,3 +11,4 @@ My purpose was to learn how to use the Odin Inspector and how Scriptable Objects
 - Minimalistic user interface 
 ## Highlight
 - [The Building Logic behind the Scriptable Objects](https://github.com/xXAstolXx/Tactical/blob/main/Assets/Scripts/Building.cs)
+- [UI/UX](
