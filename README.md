@@ -10,4 +10,4 @@ My purpose was to learn how to use the Odin Inspector and how Scriptable Objects
 - Save and load your hard-earned credits
 - Minimalistic user interface 
 ## Highlight
-- [The Building Logic behind the Scriptable Objects](
+- [The Building Logic behind the Scriptable Objects](https://github.com/xXAstolXx/Tactical/blob/main/Assets/Scripts/Building.cs)
