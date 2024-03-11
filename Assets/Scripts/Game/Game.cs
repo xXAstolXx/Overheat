@@ -31,7 +31,7 @@ public class Game : MonoBehaviour
     public int ScoreValue { get => scoreValue; }
 
     [SerializeField]
-    private TextMeshProUGUI earningTxt;
+    private TextMeshProUGUI earningTxt; //TODO: integrated it to the UI and call it with a Func SetScore()
 
 
     private void Awake()
@@ -41,10 +41,12 @@ public class Game : MonoBehaviour
         winMenu = GetComponentInChildren<WinMenu>();
         gameOverMenu = GetComponentInChildren<GameOverMenu>();
     }
+
     private void Start()
     {
         LoadGameScore();
     }
+
     private void Update()
     {
         foreach (Building building in buildings)
@@ -97,6 +99,8 @@ public class Game : MonoBehaviour
             earningTxt.text = loadedScore.ToString();
         }
     }
+
+    //remodel the Save Func in the Game
 
     private void SaveScore()
     {
