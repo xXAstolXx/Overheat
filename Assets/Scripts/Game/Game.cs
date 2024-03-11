@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
     private static Game instance;
 
     public List<Building> buildings = new List<Building>();
+
     private Game()
     {
     }
@@ -42,12 +43,7 @@ public class Game : MonoBehaviour
     }
     private void Start()
     {
-        SaveSystem.LoadGameData();
-        if(SaveSystem.LoadGameData() != null)
-        {
-            earningTxt.text = SaveSystem.LoadGameData().playerScore.ToString();
-
-        }
+        LoadGameScore();
     }
     private void Update()
     {
@@ -68,6 +64,7 @@ public class Game : MonoBehaviour
         {
             scoreValue *= scoreModifer;
             scoreValue /= scoreDecreaseAmount;
+            Debug.Log($"scoreValue: {scoreValue}");
         }
     }
 
@@ -81,16 +78,36 @@ public class Game : MonoBehaviour
     public void GameWon()
     {
         CalculateScore();
-        GameData dataToSave = new GameData();
-        dataToSave.playerScore = scoreValue;
-        SaveSystem.SaveGameData(dataToSave);
-        earningTxt.text = scoreValue.ToString();
         winMenu.ShowScreen();
+        SaveScore();
+        earningTxt.text = scoreValue.ToString();
         SetTimescale(0f);
     }
 
     private void SetTimescale(float timeScale)
     {
         Time.timeScale = timeScale;
+    }
+
+    private void LoadGameScore()
+    {
+        if (SaveSystem.LoadGameData() != null)
+        {
+            var loadedScore = SaveSystem.LoadGameData().playerScore;
+            earningTxt.text = loadedScore.ToString();
+        }
+    }
+
+    private void SaveScore()
+    {
+        if (SaveSystem.LoadGameData() != null)
+        {
+            var loadedScore = SaveSystem.LoadGameData().playerScore;
+            Debug.Log("loaded score: " + loadedScore.ToString());
+            scoreValue += loadedScore;
+        }
+        GameData dataToSave = new GameData();
+        dataToSave.playerScore = scoreValue;
+        SaveSystem.SaveGameData(dataToSave);
     }
 }
