@@ -144,4 +144,9 @@ public class Building : MonoBehaviour
         Vector3 resultVector = new Vector3(Mathf.Cos(randomAngle)*randomRadius+transform.position.x,Mathf.Sin(randomAngle)*randomRadius+transform.position.y,0f);
         return resultVector;
     }
+
+    private void OnDestroy()
+    {
+        TimeTickSystem.OnTick -= TimeTickSystem_OnTick;
+    }
 }

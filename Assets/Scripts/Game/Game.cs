@@ -1,16 +1,10 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Game : MonoBehaviour
 {
+    #region Singleton
     private static Game instance;
-
-    public List<Building> buildings = new List<Building>();
-
-    private Game()
-    {
-    }
 
     public static Game Instance
     {
@@ -19,27 +13,22 @@ public class Game : MonoBehaviour
             return instance;
         }
     }
+    #endregion
 
     [SerializeField]
     private int scoreModifer;
     [SerializeField]
     private int scoreDecreaseAmount;
     private int scoreValue;
-    private WinMenu winMenu;
-    private GameOverMenu gameOverMenu;
-
     public int ScoreValue { get => scoreValue; }
 
-    [SerializeField]
-    private TextMeshProUGUI earningTxt; //TODO: integrated it to the UI and call it with a Func SetScore()
-
+    public List<Building> buildings = new List<Building>();
 
     private void Awake()
     {
         instance = this;
+        SetTimescale(1.0f);
         scoreValue = 0;
-        winMenu = GetComponentInChildren<WinMenu>();
-        gameOverMenu = GetComponentInChildren<GameOverMenu>();
     }
 
     private void Start()
@@ -70,19 +59,18 @@ public class Game : MonoBehaviour
         }
     }
 
-
     public void GameOver()
     {
-        gameOverMenu.ShowScreen();
+        UI.Instance.GameOverMenu.ShowScreen();
         SetTimescale(0f);
     }
 
     public void GameWon()
     {
         CalculateScore();
-        winMenu.ShowScreen();
+        UI.Instance.WinMenu.ShowScreen();
         SaveScore();
-        earningTxt.text = scoreValue.ToString();
+        UI.Instance.EarningTxt.SetText(scoreValue.ToString());
         SetTimescale(0f);
     }
 
@@ -96,7 +84,8 @@ public class Game : MonoBehaviour
         if (SaveSystem.LoadGameData() != null)
         {
             var loadedScore = SaveSystem.LoadGameData().playerScore;
-            earningTxt.text = loadedScore.ToString();
+            Debug.Log("UI:  " +  UI.Instance);
+            UI.Instance.EarningTxt.SetText(loadedScore.ToString());
         }
     }
 
