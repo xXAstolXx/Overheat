@@ -335,6 +335,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1254741637499085872, guid: fc2f7dee2d218974d97242f30ccbfca9, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -0.0000038146973
+      objectReference: {fileID: 0}
+    - target: {fileID: 1254741637499085872, guid: fc2f7dee2d218974d97242f30ccbfca9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -48
+      objectReference: {fileID: 0}
     - target: {fileID: 1739459982434546725, guid: fc2f7dee2d218974d97242f30ccbfca9, type: 3}
       propertyPath: m_Name
       value: Game
