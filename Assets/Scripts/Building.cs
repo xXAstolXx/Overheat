@@ -80,13 +80,13 @@ public class Building : MonoBehaviour
 
     private void TickSystem(int ticksToGenerate)
     {
-        TimeTickSystem.OnTick += TimeTickSystem_OnTick;
+        TimeTickSystem.OnTick += OnTick;
         buildingData.GenTick = 0;
         buildingData.GenTickMax = ticksToGenerate;
         isGenerating = true;
     }
 
-    private void TimeTickSystem_OnTick(object sender, TimeTickSystem.OnTickEventArgs e)
+    private void OnTick(object sender, TimeTickSystem.OnTickEventArgs e)
     {
         if(isGenerating)
         {
@@ -147,6 +147,6 @@ public class Building : MonoBehaviour
 
     private void OnDestroy()
     {
-        TimeTickSystem.OnTick -= TimeTickSystem_OnTick;
+        TimeTickSystem.OnTick -= OnTick;
     }
 }

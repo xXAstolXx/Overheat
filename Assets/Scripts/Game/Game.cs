@@ -49,7 +49,7 @@ public class Game : MonoBehaviour
         GameOver();
     }
 
-    private void CalculateScore()
+    private void CalculateScore() // extract that into a class e.g. ScoreManager
     {
         if(scoreModifer !=0)
         {
@@ -79,6 +79,7 @@ public class Game : MonoBehaviour
         Time.timeScale = timeScale;
     }
 
+    // extract Load and Save Score into a class e.g. SaveManager
     private void LoadGameScore()
     {
         if (SaveSystem.LoadGameData() != null)
