@@ -82,9 +82,10 @@ public class Game : MonoBehaviour
     // extract Load and Save Score into a class e.g. SaveManager
     private void LoadGameScore()
     {
-        if (SaveSystem.LoadGameData() != null)
+        if (JSONSaveSystem.LoadGameData() != null)
         {
-            var loadedScore = SaveSystem.LoadGameData().playerScore;
+            //var loadedScore = SaveSystem.LoadGameData().playerScore;
+            var loadedScore = JSONSaveSystem.LoadGameData().playerScore;
             Debug.Log("UI:  " +  UI.Instance);
             UI.Instance.EarningTxt.SetText(loadedScore.ToString());
         }
@@ -94,14 +95,16 @@ public class Game : MonoBehaviour
 
     private void SaveScore()
     {
-        if (SaveSystem.LoadGameData() != null)
+        if (JSONSaveSystem.LoadGameData() != null)/*(SaveSystem.LoadGameData() != null)*/ 
         {
-            var loadedScore = SaveSystem.LoadGameData().playerScore;
+            //var loadedScore = SaveSystem.LoadGameData().playerScore;
+            var loadedScore = JSONSaveSystem.LoadGameData().playerScore;
             Debug.Log("loaded score: " + loadedScore.ToString());
             scoreValue += loadedScore;
         }
         GameData dataToSave = new GameData();
         dataToSave.playerScore = scoreValue;
-        SaveSystem.SaveGameData(dataToSave);
+        JSONSaveSystem.SaveGameData(dataToSave);
+        //SaveSystem.SaveGameData(dataToSave);
     }
 }
