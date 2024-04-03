@@ -15,7 +15,7 @@ public class WinMenu : Screen
     public override void ShowScreen()
     {
         base.ShowScreen();
-        SetEarningText(Game.Instance.ScoreValue);
+        SetEarningText(ScoreManager.Instance.Income);
     }
 
     private void SetEarningText(int value)

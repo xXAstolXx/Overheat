@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Game : MonoBehaviour
 {
@@ -15,25 +16,14 @@ public class Game : MonoBehaviour
     }
     #endregion
 
-    [SerializeField]
-    private int scoreModifer;
-    [SerializeField]
-    private int scoreDecreaseAmount;
-    private int scoreValue;
-    public int ScoreValue { get => scoreValue; }
-
     public List<Building> buildings = new List<Building>();
+
+    public UnityEvent OnGameWon = new UnityEvent();
 
     private void Awake()
     {
         instance = this;
         SetTimescale(1.0f);
-        scoreValue = 0;
-    }
-
-    private void Start()
-    {
-        LoadGameScore();
     }
 
     private void Update()
@@ -42,22 +32,13 @@ public class Game : MonoBehaviour
         {
             if(building.isOverheated == false)
             {
-                scoreValue++;
+                ScoreManager.Instance.IncreaseIncomeModifer();
                 return;
             }
         }
         GameOver();
     }
 
-    private void CalculateScore() // extract that into a class e.g. ScoreManager
-    {
-        if(scoreModifer !=0)
-        {
-            scoreValue *= scoreModifer;
-            scoreValue /= scoreDecreaseAmount;
-            Debug.Log($"scoreValue: {scoreValue}");
-        }
-    }
 
     public void GameOver()
     {
@@ -67,44 +48,15 @@ public class Game : MonoBehaviour
 
     public void GameWon()
     {
-        CalculateScore();
+        OnGameWon.Invoke();
         UI.Instance.WinMenu.ShowScreen();
-        SaveScore();
-        UI.Instance.EarningTxt.SetText(scoreValue.ToString());
+        SaveManager.Instance.SaveGameScore();
+        UI.Instance.EarningTxt.SetText(ScoreManager.Instance.Income.ToString());
         SetTimescale(0f);
     }
 
     private void SetTimescale(float timeScale)
     {
         Time.timeScale = timeScale;
-    }
-
-    // extract Load and Save Score into a class e.g. SaveManager
-    private void LoadGameScore()
-    {
-        if (JSONSaveSystem.LoadGameData() != null)
-        {
-            //var loadedScore = SaveSystem.LoadGameData().playerScore;
-            var loadedScore = JSONSaveSystem.LoadGameData().playerScore;
-            Debug.Log("UI:  " +  UI.Instance);
-            UI.Instance.EarningTxt.SetText(loadedScore.ToString());
-        }
-    }
-
-    //remodel the Save Func in the Game
-
-    private void SaveScore()
-    {
-        if (JSONSaveSystem.LoadGameData() != null)/*(SaveSystem.LoadGameData() != null)*/ 
-        {
-            //var loadedScore = SaveSystem.LoadGameData().playerScore;
-            var loadedScore = JSONSaveSystem.LoadGameData().playerScore;
-            Debug.Log("loaded score: " + loadedScore.ToString());
-            scoreValue += loadedScore;
-        }
-        GameData dataToSave = new GameData();
-        dataToSave.playerScore = scoreValue;
-        JSONSaveSystem.SaveGameData(dataToSave);
-        //SaveSystem.SaveGameData(dataToSave);
     }
 }

@@ -250,6 +250,50 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1083369263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1083369264}
+  - component: {fileID: 1083369265}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1083369264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083369263}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1491059080}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1083369265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083369263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967ebea996aa22a40a78ca6152f92af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1104997951 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6676837158294025017, guid: fc2f7dee2d218974d97242f30ccbfca9, type: 3}
@@ -261,6 +305,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1491059080 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6019284965283831421, guid: fc2f7dee2d218974d97242f30ccbfca9, type: 3}
+  m_PrefabInstance: {fileID: 621429062347033960}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1825553147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1825553148}
+  - component: {fileID: 1825553149}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1825553148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825553147}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1491059080}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1825553149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825553147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b4521fa2b6f1148bfcd5217f3a11d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  incomeModifer: 1
+  incomeModiferIncrease: 1
+  baseIncome: 500
 --- !u!4 &1970548324 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 810457178199350530, guid: 928328ff9b53f0f4aac663bcc2e77b98, type: 3}
@@ -389,7 +485,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6019284965283831421, guid: fc2f7dee2d218974d97242f30ccbfca9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1825553148}
+    - targetCorrespondingSourceObject: {fileID: 6019284965283831421, guid: fc2f7dee2d218974d97242f30ccbfca9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1083369264}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc2f7dee2d218974d97242f30ccbfca9, type: 3}
 --- !u!1001 &937503351336630927
