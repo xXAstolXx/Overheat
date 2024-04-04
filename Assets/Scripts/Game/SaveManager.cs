@@ -30,7 +30,7 @@ public class SaveManager : MonoBehaviour
         {
             var loadedScore = JSONSaveSystem.LoadGameData().playerScore;
             UI.Instance.EarningTxt.SetText(loadedScore.ToString());
-            Debug.Log("hello");
+            Debug.Log("Loaded Savefile");
         }
     }
 
