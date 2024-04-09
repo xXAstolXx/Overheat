@@ -7,18 +7,40 @@ public class Player : Collector
 
     private BackPack backPack;
 
+    private Vector2 moveDirection;
+
     void Start()
     {
         backPack = GetComponentInChildren<BackPack>();
     }
 
+    public void UpdateMoveInput(Vector2 movementVector)
+    {
+        if(movementVector.magnitude != 0)
+        {
+            moveDirection = movementVector;
+        }
+        else
+        {
+            moveDirection = Vector2.zero;
+        }
+    }
+
+    private void Move()
+    {
+        Vector2 moveVector = moveDirection;
+
+        transform.Translate(moveVector * moveSpeed * Time.deltaTime);
+    }
+
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        //float horizontalInput = Input.GetAxis("Horizontal");
+        //float verticalInput = Input.GetAxis("Vertical");
 
-        Vector2 movement = new Vector2(horizontalInput, verticalInput);
-        transform.Translate(movement * moveSpeed * Time.deltaTime);
+        //Vector2 movement = new Vector2(horizontalInput, verticalInput);
+        //transform.Translate(movement * moveSpeed * Time.deltaTime);
+        Move();
     }
 
 #region Collect Resource

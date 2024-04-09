@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &91712818 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 865992177961448078, guid: 928328ff9b53f0f4aac663bcc2e77b98, type: 3}
+  m_PrefabInstance: {fileID: 6124297508871019077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,6 +367,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 810457178199350530, guid: 928328ff9b53f0f4aac663bcc2e77b98, type: 3}
   m_PrefabInstance: {fileID: 6124297508871019077}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1970548327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91712818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37623bb809d51cc40a610fa30bfb5ade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1970548330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91712818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: da5a4fd796d90a94397e49f623b9e3de, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1970548327}
+        m_TargetAssemblyTypeName: PlayerKeybindings, Assembly-CSharp
+        m_MethodName: UpdateMoveInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3bab27f2-d1b4-4785-93e4-f805e7e16bbc
+    m_ActionName: Keyboard/Moving[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Keyboard
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &64624880254579974
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -850,7 +913,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 865992177961448078, guid: 928328ff9b53f0f4aac663bcc2e77b98, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1970548327}
+    - targetCorrespondingSourceObject: {fileID: 865992177961448078, guid: 928328ff9b53f0f4aac663bcc2e77b98, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1970548330}
   m_SourcePrefab: {fileID: 100100000, guid: 928328ff9b53f0f4aac663bcc2e77b98, type: 3}
 --- !u!1001 &8761319219647438943
 PrefabInstance:
