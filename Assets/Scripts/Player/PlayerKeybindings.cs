@@ -7,6 +7,7 @@ public class PlayerKeybindings : MonoBehaviour
     private PlayerControls playerInputActions;
 
     private InputAction moving;
+    private InputAction shoot;
 
     private Player player;
 
@@ -15,6 +16,7 @@ public class PlayerKeybindings : MonoBehaviour
         playerInputActions = new PlayerControls();
 
         moving = playerInputActions.Keyboard.Moving;
+        shoot = playerInputActions.Keyboard.Shoot;
 
         player = GetComponent<Player>();
     }
@@ -22,15 +24,24 @@ public class PlayerKeybindings : MonoBehaviour
     private void OnEnable()
     {
         moving.Enable();
+        shoot.Enable();
     }
 
     private void OnDisable()
     {
         moving.Disable();
+        shoot.Enable();
     }
 
+    public void Shoot(CallbackContext context)
+    {
+        if(shoot.enabled)
+        {
+            player.OnShootPressed();
+        }
+    }
 
-    public void UpdateMoveInput(CallbackContext context)
+    public void MoveInput(CallbackContext context)
     {
         if(moving.enabled)
         {

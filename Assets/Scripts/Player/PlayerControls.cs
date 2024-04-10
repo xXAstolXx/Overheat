@@ -35,11 +35,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca159d2d-48dc-4247-961d-770871c6d687"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""Keyboard"",
                     ""id"": ""f2925cec-2c0a-4439-be18-aeab9c627722"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -92,6 +101,83 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Moving"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Controler"",
+                    ""id"": ""bc84990c-72ec-4327-9473-50a494994fbf"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moving"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""70c10de1-0095-4552-9135-b3c9034ce1f0"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moving"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""be7732e5-e664-4dc3-87e0-d6ccbdc8a9ec"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moving"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""8ddfeb54-bc39-4f59-a66e-929fe7464619"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moving"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""f3bd0589-04db-407e-bb72-22e390228806"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moving"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5fd51d10-e5ba-453e-bed7-2cfb216c32a8"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8239862-748f-42a7-9ec3-bcfcbe47f509"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +187,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Keyboard
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
         m_Keyboard_Moving = m_Keyboard.FindAction("Moving", throwIfNotFound: true);
+        m_Keyboard_Shoot = m_Keyboard.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,11 +250,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Keyboard;
     private List<IKeyboardActions> m_KeyboardActionsCallbackInterfaces = new List<IKeyboardActions>();
     private readonly InputAction m_Keyboard_Moving;
+    private readonly InputAction m_Keyboard_Shoot;
     public struct KeyboardActions
     {
         private @PlayerControls m_Wrapper;
         public KeyboardActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Moving => m_Wrapper.m_Keyboard_Moving;
+        public InputAction @Shoot => m_Wrapper.m_Keyboard_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,6 +269,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Moving.started += instance.OnMoving;
             @Moving.performed += instance.OnMoving;
             @Moving.canceled += instance.OnMoving;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
         }
 
         private void UnregisterCallbacks(IKeyboardActions instance)
@@ -187,6 +279,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Moving.started -= instance.OnMoving;
             @Moving.performed -= instance.OnMoving;
             @Moving.canceled -= instance.OnMoving;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
         }
 
         public void RemoveCallbacks(IKeyboardActions instance)
@@ -207,5 +302,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IKeyboardActions
     {
         void OnMoving(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }

@@ -18,7 +18,7 @@ public class Game : MonoBehaviour
 
     public List<Building> buildings = new List<Building>();
 
-    public UnityEvent OnGameWon = new UnityEvent();
+    public UnityEvent OnGameWon { get; private set; } = new UnityEvent();
 
     private void Awake()
     {

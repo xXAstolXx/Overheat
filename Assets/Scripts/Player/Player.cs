@@ -4,14 +4,24 @@ public class Player : Collector
 {
     [SerializeField]
     private float moveSpeed = 5f;
-
+    [SerializeField]
+    private float rotationSpeed;
     private BackPack backPack;
 
     private Vector2 moveDirection;
 
+    private Rigidbody2D rb;
+
+
     void Start()
     {
         backPack = GetComponentInChildren<BackPack>();
+        rb = GetComponent<Rigidbody2D>();
+    }
+    void FixedUpdate()
+    {
+        Move();
+        RotateInDirectionOfInput();
     }
 
     public void UpdateMoveInput(Vector2 movementVector)
@@ -29,21 +39,49 @@ public class Player : Collector
     private void Move()
     {
         Vector2 moveVector = moveDirection;
-
-        transform.Translate(moveVector * moveSpeed * Time.deltaTime);
+        rb.velocity = moveVector * moveSpeed * Time.fixedDeltaTime;
+        //transform.Translate(moveVector * moveSpeed * Time.deltaTime);
     }
 
-    void Update()
+    private void RotateInDirectionOfInput()
     {
-        //float horizontalInput = Input.GetAxis("Horizontal");
-        //float verticalInput = Input.GetAxis("Vertical");
-
-        //Vector2 movement = new Vector2(horizontalInput, verticalInput);
-        //transform.Translate(movement * moveSpeed * Time.deltaTime);
-        Move();
+        if(moveDirection != Vector2.zero)
+        {
+            Quaternion targetRoatation = Quaternion.LookRotation(transform.forward, moveDirection);
+            Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRoatation, rotationSpeed * Time.fixedDeltaTime);
+            rb.MoveRotation(rotation);
+        }
     }
 
-#region Collect Resource
+    public void OnShootPressed()
+    {
+        if(backPack.ressourceDatas.Count >= backPack.MaxCapacity)
+        {
+            switch (backPack.ressourceDatas[0].Type)
+            {
+                case ResourceType.TRIANGLE:
+                    Debug.Log("Triangle Munition");
+                    RemoveItemfromBackPack();
+                    break;
+                case ResourceType.SQUARE:
+                    Debug.Log("Square Munition");
+                    RemoveItemfromBackPack();
+                    break;
+                case ResourceType.DIAMOND:
+                    Debug.Log("Diamond Munition");
+                    RemoveItemfromBackPack();
+                    break;
+                case ResourceType.NONE:
+                    Debug.Log("NONE MUN");
+                    break;
+            }
+        }
+
+    }
+
+
+
+    #region Collect Resource
     public override void TryCollect(RessourceInteracable ressourceInteracable, RessourceData ressourceData)
     {
         Debug.Log($"Collided with {ressourceInteracable.name}");
@@ -75,7 +113,7 @@ public class Player : Collector
     #region Interact with Building
     public override void TryInteract(ResourceType coolingResourceType)
     {
-        if(backPack.ressourceDatas.Count == 1 && backPack.ressourceDatas[0].Type == coolingResourceType)
+        if(backPack.ressourceDatas.Count == backPack.MaxCapacity && backPack.ressourceDatas[backPack.MaxCapacity - 1].Type == coolingResourceType)
         {
             RemoveItemfromBackPack();
         }
@@ -95,7 +133,7 @@ public class Player : Collector
 
     public float GetResourceDataAmountFromBackPack()
     {
-        if(backPack.ressourceDatas.Count >= 1)
+        if(backPack.ressourceDatas.Count >= backPack.MaxCapacity)
         {
             return backPack.ressourceDatas[0].Amount;
         }
