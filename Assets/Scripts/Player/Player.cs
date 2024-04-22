@@ -12,6 +12,10 @@ public class Player : Collector
 
     private Rigidbody2D rb;
 
+    [SerializeField]
+    private Bullet[] bullets = new Bullet[3];
+    [SerializeField]
+    private Transform bulletShootPoint;
 
     void Start()
     {
@@ -40,7 +44,6 @@ public class Player : Collector
     {
         Vector2 moveVector = moveDirection;
         rb.velocity = moveVector * moveSpeed * Time.fixedDeltaTime;
-        //transform.Translate(moveVector * moveSpeed * Time.deltaTime);
     }
 
     private void RotateInDirectionOfInput()
@@ -53,7 +56,8 @@ public class Player : Collector
         }
     }
 
-    public void OnShootPressed()
+    //Shoot Function in diffrent Function seperaten 
+    public void OnShootPressed() 
     {
         if(backPack.ressourceDatas.Count >= backPack.MaxCapacity)
         {
@@ -61,14 +65,17 @@ public class Player : Collector
             {
                 case ResourceType.TRIANGLE:
                     Debug.Log("Triangle Munition");
+                    Instantiate(bullets[0].gameObject, bulletShootPoint.position, Quaternion.identity);
                     RemoveItemfromBackPack();
                     break;
                 case ResourceType.SQUARE:
                     Debug.Log("Square Munition");
+                    Instantiate(bullets[1].gameObject, bulletShootPoint.position, Quaternion.identity);
                     RemoveItemfromBackPack();
                     break;
                 case ResourceType.DIAMOND:
                     Debug.Log("Diamond Munition");
+                    Instantiate(bullets[2].gameObject, bulletShootPoint.position, Quaternion.identity);
                     RemoveItemfromBackPack();
                     break;
                 case ResourceType.NONE:

@@ -327,7 +327,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 633174713}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 723480019}
   - component: {fileID: 723480021}
   - component: {fileID: 723480020}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 878190376}
   - component: {fileID: 878190375}
   - component: {fileID: 878190374}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StartButtonCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -601,7 +601,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1172832938}
   - component: {fileID: 1172832939}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 1240952428}
   - component: {fileID: 1240952430}
   - component: {fileID: 1240952429}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -766,7 +766,7 @@ GameObject:
   - component: {fileID: 1254206865}
   - component: {fileID: 1254206868}
   - component: {fileID: 1254206869}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StartBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}

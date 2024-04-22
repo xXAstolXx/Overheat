@@ -12,9 +12,9 @@ TagManager:
   - Water
   - UI
   - Building
-  - 
-  - 
-  - 
+  - Bullets
+  - Resource
+  - Enemy
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
     locked: 0
   - name: Buttons
     uniqueID: 2274365965
+    locked: 0
+  - name: Bullets
+    uniqueID: 2711382769
     locked: 0
   - name: Player
     uniqueID: 23194109

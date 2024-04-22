@@ -4,7 +4,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerKeybindings : MonoBehaviour
 {
-    private PlayerControls playerInputActions;
+    private PlayerControls playerInputActions; //Seperate the Input maps for future CoOP feature
 
     private InputAction moving;
     private InputAction shoot;
