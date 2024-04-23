@@ -1,4 +1,6 @@
+using Sirenix.Serialization;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,13 +14,14 @@ public class Building : MonoBehaviour
 
     private SpriteRenderer sprite;
     private bool isGenerating;
+
     private CircleCollider2D outerCollider;
     [SerializeField]
     private CircleCollider2D innerCollider;
 
-    private OverheatCanvas overheatCanvas;
     [SerializeField]
     private float currentHeat = 0;
+    private OverheatCanvas overheatCanvas;
     private OverheatImage overheatImage;
     public bool isOverheated { get; private set; }
 
