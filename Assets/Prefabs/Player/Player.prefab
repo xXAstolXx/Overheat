@@ -105,7 +105,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 300
   rotationSpeed: 800
-  bullets: []
+  bullets:
+  - {fileID: -5800717781291687662, guid: 32fa0a0ef3457254b850357177b1b2d8, type: 3}
+  - {fileID: -2188497815333730946, guid: d557c20f729a1d94ab9182716ee1f0b5, type: 3}
+  - {fileID: -4994669560323483157, guid: 0654768506600ba45988cdcd6fe4dc65, type: 3}
   bulletShootPoint: {fileID: 166247908450966168}
 --- !u!114 &7548603057610215093
 MonoBehaviour:

@@ -203,3 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50800f7c7ac6f7d49bb802f22f261250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 1101538729979080064}
+  data: {fileID: 11400000, guid: f84f3114535c7d446afe27b1c2d64d4d, type: 2}
+  damageEffectTypeData: {fileID: 11400000, guid: 43beb7626ea3a124281f4a64c10a4636, type: 2}

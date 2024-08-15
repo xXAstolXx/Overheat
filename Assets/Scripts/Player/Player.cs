@@ -15,6 +15,7 @@ namespace Overheat.Player
 		private BackPack backPack;
 
 		private Vector2 moveDirection;
+		private Vector2 rotationDirection;
 
 		private Rigidbody2D rb;
 
@@ -27,6 +28,7 @@ namespace Overheat.Player
 		{
 			backPack = GetComponentInChildren<BackPack>();
 			rb = GetComponent<Rigidbody2D>();
+
 		}
 
 		private void Update()
@@ -51,6 +53,7 @@ namespace Overheat.Player
 		{
 			Vector2 moveVector = moveDirection;
 			rb.velocity = moveVector * moveSpeed * Time.fixedDeltaTime;
+			rotationDirection = moveVector;
 		}
 
 		private void RotateInDirectionOfInput()
@@ -73,6 +76,7 @@ namespace Overheat.Player
 					case ResourceType.TRIANGLE:
 						Debug.Log( "Triangle Munition" );
 						Instantiate( bullets[0].gameObject, bulletShootPoint.position, Quaternion.identity );
+						bullets[0].gameObject.GetComponent<Bullet>().StartTravel( rotationDirection );
 						RemoveItemfromBackPack();
 						break;
 					case ResourceType.SQUARE:
