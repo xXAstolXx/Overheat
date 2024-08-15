@@ -1,26 +1,28 @@
 using UnityEngine;
-
-public class OverheatCanvas : MonoBehaviour
+namespace Overheat.Ui.WorldUi.OverheatUi
 {
-    private OverheatImage overheatImage;
+	internal class OverheatCanvas : MonoBehaviour
+	{
+		private OverheatImage overheatImage;
 
-    private void Start() 
-    {
-        overheatImage = GetComponentInChildren<OverheatImage>();
-    }
+		private void Start()
+		{
+			overheatImage = GetComponentInChildren<OverheatImage>();
+		}
 
-    public void IncreaseOverheating(float amount)
-    {
-        overheatImage.IncreaseOverheating(amount);
-    }
+		public void IncreaseOverheating( float amount )
+		{
+			overheatImage.IncreaseOverheating( amount );
+		}
 
-    public void DecreaseOverheating(float amount)
-    {
-        overheatImage.DecreaseOverheating(amount);
-    }
+		public void DecreaseOverheating( float amount )
+		{
+			overheatImage.DecreaseOverheating( amount );
+		}
 
-    public float GetOverHeatAmount()
-    {
-        return overheatImage.OverHeatAmount;
-    }
+		public float GetOverHeatAmount()
+		{
+			return overheatImage.OverHeatAmount;
+		}
+	}
 }

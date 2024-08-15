@@ -1,14 +1,17 @@
+using Overheat.Interaction.Interactable;
 using UnityEngine;
 
-public abstract class Collector : MonoBehaviour
+namespace Overheat.Player.InteractionSystem.Collect
 {
-    public virtual void TryCollect(RessourceInteracable ressourceInteracable, RessourceData data)
-    {
+	internal abstract class Collector : MonoBehaviour
+	{
+		internal virtual void TryCollect( RessourceInteracable ressourceInteracable, RessourceData data )
+		{ }
+		protected abstract void Collect( GameObject target, RessourceData data );
+		public virtual void TryInteract( ResourceType resourceType )
+		{ }
 
-    }
-    protected abstract void Collect(GameObject target, RessourceData data);
-    public virtual void TryInteract(ResourceType resourceType)
-    {}
-
+	}
 }
+
 

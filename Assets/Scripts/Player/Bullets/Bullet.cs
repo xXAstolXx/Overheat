@@ -1,7 +1,10 @@
-using UnityEngine;
-
-public class Bullet : MonoBehaviour
+namespace Overheat.Weapon.Bullet
 {
+	using UnityEngine;
 
-    //TODO: Implement the Base Functinality for the Bullet where the other types of bullet can inherhit from.
+	internal class Bullet : MonoBehaviour
+	{
+
+	}
 }
+

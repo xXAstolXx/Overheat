@@ -1,51 +1,55 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
-using static UnityEngine.InputSystem.InputAction;
-
-public class PlayerKeybindings : MonoBehaviour
+namespace Overheat.Player.InputKeybindings
 {
-    private PlayerControls playerInputActions; //Seperate the Input maps for future CoOP feature
+	using UnityEngine;
+	using UnityEngine.InputSystem;
+	using static UnityEngine.InputSystem.InputAction;
 
-    private InputAction moving;
-    private InputAction shoot;
+	public class PlayerKeybindings : MonoBehaviour
+	{
+		private PlayerControls playerInputActions; //Seperate the Input maps for future CoOP feature
 
-    private Player player;
+		private InputAction moving;
+		private InputAction shoot;
 
-    private void Awake()
-    {
-        playerInputActions = new PlayerControls();
-        moving = playerInputActions.Keyboard.Moving;
-        shoot = playerInputActions.Keyboard.Shoot;
+		private Player player;
 
-        player = GetComponent<Player>();
-    }
+		private void Awake()
+		{
+			playerInputActions = new PlayerControls();
+			moving = playerInputActions.Keyboard.Moving;
+			shoot = playerInputActions.Keyboard.Shoot;
 
-    private void OnEnable()
-    {
-        moving.Enable();
-        shoot.Enable();
-    }
+			player = GetComponent<Player>();
+		}
 
-    private void OnDisable()
-    {
-        moving.Disable();
-        shoot.Disable();
-    }
+		private void OnEnable()
+		{
+			moving.Enable();
+			shoot.Enable();
+		}
 
-	public void Shoot(CallbackContext context)
-    {
-        if(shoot.enabled)
-        {
-            player.OnShootPressed();
-        }
-    }
+		private void OnDisable()
+		{
+			moving.Disable();
+			shoot.Disable();
+		}
 
-    public void MoveInput(CallbackContext context)
-    {
-        if(moving.enabled)
-        {
-            Vector2 moveVector = context.ReadValue<Vector2>().normalized;
-            player.UpdateMoveInput(moveVector);
-        }
-    }
+		public void Shoot( CallbackContext context )
+		{
+			if( shoot.enabled )
+			{
+				player.OnShootPressed();
+			}
+		}
+
+		public void MoveInput( CallbackContext context )
+		{
+			if( moving.enabled )
+			{
+				Vector2 moveVector = context.ReadValue<Vector2>().normalized;
+				player.UpdateMoveInput( moveVector );
+			}
+		}
+	}
 }
+

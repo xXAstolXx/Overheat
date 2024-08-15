@@ -1,17 +1,21 @@
-using TMPro;
-using UnityEngine;
-
-public class Textlabel : MonoBehaviour
+namespace Overheat.Ui.UiScreen.Component
 {
-    private TextMeshProUGUI text;
+	using TMPro;
+	using UnityEngine;
 
-    private void Awake()
-    {
-        text = GetComponent<TextMeshProUGUI>();
-    }
+	public class Textlabel : MonoBehaviour
+	{
+		private TextMeshProUGUI text;
 
-    public void SetText(string textToSet)
-    {
-        text.text = textToSet;
-    }
+		private void Awake()
+		{
+			text = GetComponent<TextMeshProUGUI>();
+		}
+
+		public void SetText( string textToSet )
+		{
+			text.text = textToSet;
+		}
+	}
 }
+

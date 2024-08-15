@@ -1,30 +1,35 @@
 using System;
 using UnityEngine;
 
-public class TimeTickSystem : MonoBehaviour
+namespace Overheat.Game.TickSystem
 {
-    public class OnTickEventArgs : EventArgs
-    {
-        public int tick;
-    }
-    public static event EventHandler<OnTickEventArgs> OnTick;
-    private const float TICK_TIMER_MAX = 1.5f;
-    private int tick;
-    private float tickTimer;
+	internal class TimeTickSystem : MonoBehaviour
+	{
+		internal class OnTickEventArgs : EventArgs
+		{
+			internal int tick;
+		}
 
-    private void Awake()
-    {
-        tick = 0;
-    }
+		internal static event EventHandler<OnTickEventArgs> OnTick;
+		private const float TICK_TIMER_MAX = 1.5f;
+		private int tick;
+		private float tickTimer;
 
-    void Update()
-    {
-        tickTimer += Time.deltaTime;
-        if(tickTimer >= TICK_TIMER_MAX)
-        {
-            tickTimer -= TICK_TIMER_MAX;
-            tick++;
-            if(OnTick != null) OnTick(this, new OnTickEventArgs{tick = tick});
-        }
-    }
+		private void Awake()
+		{
+			tick = 0;
+		}
+
+		private void Update()
+		{
+			tickTimer += Time.deltaTime;
+			if( tickTimer >= TICK_TIMER_MAX )
+			{
+				tickTimer -= TICK_TIMER_MAX;
+				tick++;
+				if( OnTick != null ) OnTick( this, new OnTickEventArgs { tick = tick } );
+			}
+		}
+	}
 }
+

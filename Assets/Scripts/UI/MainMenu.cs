@@ -1,9 +1,13 @@
-using UnityEngine;
-
-public class MainMenu : MonoBehaviour
+namespace Overheat.Ui.MainMenu
 {
-    void Start()
-    {
-        Time.timeScale = 1.0f;
-    }
+	using UnityEngine;
+
+	public class MainMenu : MonoBehaviour
+	{
+		void Start()
+		{
+			Time.timeScale = 1.0f;
+		}
+	}
 }
+

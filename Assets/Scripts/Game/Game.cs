@@ -1,62 +1,68 @@
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
-
-public class Game : MonoBehaviour
+namespace Overheat.Singletons.Game
 {
-    #region Singleton
-    private static Game instance;
+	using Overheat.Buildings.Base;
+	using Overheat.Game.ScoreSystem;
+	using Overheat.Generel.SaveSystem.API;
+	using Overheat.Singletons.Ui;
+	using System.Collections.Generic;
+	using UnityEngine;
+	using UnityEngine.Events;
 
-    public static Game Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-    #endregion
+	internal class Game : MonoBehaviour
+	{
+		#region Singleton
+		private static Game instance;
 
-    public List<Building> buildings = new List<Building>();
+		internal static Game Instance
+		{
+			get
+			{
+				return instance;
+			}
+		}
+		#endregion
 
-    public UnityEvent OnGameWon { get; private set; } = new UnityEvent();
+		internal List<Building> buildings = new List<Building>();
 
-    private void Awake()
-    {
-        instance = this;
-        SetTimescale(1.0f);
-    }
+		internal UnityEvent OnGameWon { get; private set; } = new UnityEvent();
 
-    private void Update()
-    {
-        foreach (Building building in buildings)
-        {
-            if(building.isOverheated == false)
-            {
-                ScoreManager.Instance.IncreaseIncomeModifer();
-                return;
-            }
-        }
-        GameOver();
-    }
+		private void Awake()
+		{
+			instance = this;
+			SetTimescale( 1.0f );
+		}
 
+		private void Update()
+		{
+			foreach( Building building in buildings )
+			{
+				if( building.isOverheated == false )
+				{
+					ScoreManager.Instance.IncreaseIncomeModifer();
+					return;
+				}
+			}
+			GameOver();
+		}
 
-    public void GameOver()
-    {
-        UI.Instance.GameOverMenu.ShowScreen();
-        SetTimescale(0f);
-    }
+		public void GameOver()
+		{
+			UI.Instance.GameOverMenu.ShowScreen();
+			SetTimescale( 0f );
+		}
 
-    public void GameWon()
-    {
-        OnGameWon.Invoke();
-        UI.Instance.WinMenu.ShowScreen();
-        SaveManager.Instance.SaveGameScore();
-        UI.Instance.EarningTxt.SetText(ScoreManager.Instance.Income.ToString());
-        SetTimescale(0f);
-    }
+		public void GameWon()
+		{
+			OnGameWon.Invoke();
+			UI.Instance.WinMenu.ShowScreen();
+			SaveManager.Instance.SaveGameScore();
+			UI.Instance.EarningTxt.SetText( ScoreManager.Instance.Income.ToString() );
+			SetTimescale( 0f );
+		}
 
-    private void SetTimescale(float timeScale)
-    {
-        Time.timeScale = timeScale;
-    }
+		private void SetTimescale( float timeScale )
+		{
+			Time.timeScale = timeScale;
+		}
+	}
 }

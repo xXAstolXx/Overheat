@@ -1,49 +1,53 @@
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour
+namespace Overheat.Game.ScoreSystem
 {
-    #region Singleton
-    private static ScoreManager instance;
-    public static ScoreManager Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-    #endregion
+	using Overheat.Singletons.Game;
 
-    private void Awake()
-    {
-        instance = this;
-    }
+	public class ScoreManager : MonoBehaviour
+	{
+		#region Singleton
+		private static ScoreManager instance;
+		public static ScoreManager Instance
+		{
+			get
+			{
+				return instance;
+			}
+		}
+		#endregion
 
-    [SerializeField]
-    private int incomeModifer;
-    [SerializeField]
-    private int incomeModiferIncrease = 1;
-    [SerializeField]
-    private int baseIncome = 500;
-    private int income;
-    public int Income { get => income; set => income = value; }
+		private void Awake()
+		{
+			instance = this;
+		}
 
-    private void Start()
-    {
-        income = 0;
-        Game.Instance.OnGameWon.AddListener(CalculateScore);
-    }
+		[SerializeField]
+		private int incomeModifer;
+		[SerializeField]
+		private int incomeModiferIncrease = 1;
+		[SerializeField]
+		private int baseIncome = 500;
+		private int income;
+		public int Income { get => income; set => income = value; }
 
-    private void CalculateScore()
-    {
-        income = baseIncome;
-        income += incomeModifer;
-    }
+		private void Start()
+		{
+			income = 0;
+			Game.Instance.OnGameWon.AddListener( CalculateScore );
+		}
 
-    public void IncreaseIncomeModifer()
-    {
-        incomeModifer += incomeModiferIncrease / 10;
-        
-    }
+		private void CalculateScore()
+		{
+			income = baseIncome;
+			income += incomeModifer;
+		}
 
+		public void IncreaseIncomeModifer()
+		{
+			incomeModifer += incomeModiferIncrease / 10;
 
+		}
+	}
 }
+

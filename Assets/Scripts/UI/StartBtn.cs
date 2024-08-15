@@ -1,32 +1,36 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-
-public class StartBtn : MonoBehaviour
+namespace Overheat.Ui.WorldUi.StartBtn
 {
-    [SerializeField]
-    private int sceneIndex;
+	using UnityEngine;
+	using UnityEngine.SceneManagement;
+	using UnityEngine.UI;
 
-    [SerializeField]
-    private Slider slider;
-	private void Start()
-    {
-		slider.maxValue = 10;
-        slider.minValue = 0;
-        slider.value = slider.minValue;
-    }
+	internal class StartBtn : MonoBehaviour
+	{
+		[SerializeField]
+		private int sceneIndex;
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        slider.value += 0.1f;
-        if(slider.value == slider.maxValue)
-        {
-            LoadSceneByIndex(sceneIndex);
-        }
-    }
+		[SerializeField]
+		private Slider slider;
+		private void Start()
+		{
+			slider.maxValue = 10;
+			slider.minValue = 0;
+			slider.value = slider.minValue;
+		}
 
-    private void LoadSceneByIndex(int index)
-    {
-        SceneManager.LoadScene(index);
-    }
+		private void OnTriggerStay2D( Collider2D collision )
+		{
+			slider.value += 0.1f;
+			if( slider.value == slider.maxValue )
+			{
+				LoadSceneByIndex( sceneIndex );
+			}
+		}
+
+		private void LoadSceneByIndex( int index )
+		{
+			SceneManager.LoadScene( index );
+		}
+	}
 }
+

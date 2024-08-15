@@ -1,10 +1,13 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-public class SceneLoader : MonoBehaviour
+namespace Overheat.Generel.Utitlity.SceneLoader
 {
-    public void LoadSceneByIndex(int index)
-    {
-        SceneManager.LoadScene(index);
-    }
+	using UnityEngine;
+	using UnityEngine.SceneManagement;
+
+	internal class SceneLoader : MonoBehaviour
+	{
+		public void LoadSceneByIndex( int index )
+		{
+			SceneManager.LoadScene( index );
+		}
+	}
 }
