@@ -22,7 +22,8 @@ public class Player : Collector
         backPack = GetComponentInChildren<BackPack>();
         rb = GetComponent<Rigidbody2D>();
     }
-    void FixedUpdate()
+
+    void Update()
     {
         Move();
         RotateInDirectionOfInput();

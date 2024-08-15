@@ -78,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 23194109
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d6f5b08b6a863f7429c7a602f0126b84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -105,10 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 300
   rotationSpeed: 800
-  bullets:
-  - {fileID: 3417747371915426167, guid: 32fa0a0ef3457254b850357177b1b2d8, type: 3}
-  - {fileID: -4629313438576193912, guid: d557c20f729a1d94ab9182716ee1f0b5, type: 3}
-  - {fileID: -1370383101933240116, guid: 0654768506600ba45988cdcd6fe4dc65, type: 3}
+  bullets: []
   bulletShootPoint: {fileID: 166247908450966168}
 --- !u!114 &7548603057610215093
 MonoBehaviour:
@@ -349,7 +346,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 23194109
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

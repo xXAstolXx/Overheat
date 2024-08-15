@@ -14,7 +14,6 @@ public class PlayerKeybindings : MonoBehaviour
     private void Awake()
     {
         playerInputActions = new PlayerControls();
-
         moving = playerInputActions.Keyboard.Moving;
         shoot = playerInputActions.Keyboard.Shoot;
 
@@ -30,10 +29,10 @@ public class PlayerKeybindings : MonoBehaviour
     private void OnDisable()
     {
         moving.Disable();
-        shoot.Enable();
+        shoot.Disable();
     }
 
-    public void Shoot(CallbackContext context)
+	public void Shoot(CallbackContext context)
     {
         if(shoot.enabled)
         {
@@ -46,7 +45,6 @@ public class PlayerKeybindings : MonoBehaviour
         if(moving.enabled)
         {
             Vector2 moveVector = context.ReadValue<Vector2>().normalized;
-            Debug.Log("moveVector: " + moveVector);
             player.UpdateMoveInput(moveVector);
         }
     }

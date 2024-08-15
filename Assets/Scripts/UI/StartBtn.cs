@@ -9,10 +9,9 @@ public class StartBtn : MonoBehaviour
 
     [SerializeField]
     private Slider slider;
-
-    private void Start()
+	private void Start()
     {
-        slider.maxValue = 10;
+		slider.maxValue = 10;
         slider.minValue = 0;
         slider.value = slider.minValue;
     }
