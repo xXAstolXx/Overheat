@@ -8,6 +8,9 @@ namespace Overheat.Weapon.Bullet
 	internal class Bullet : MonoBehaviour
 	{
 		[SerializeField]
+		private Bullet[] bulletsPrefab = new Bullet[3];
+
+		[SerializeField]
 		private Rigidbody2D rb;
 
 		[SerializeField]
@@ -15,6 +18,13 @@ namespace Overheat.Weapon.Bullet
 
 		[SerializeField]
 		private DamageEffectTypeData damageEffectTypeData;
+
+		private Dictionary<ResourceType, int> bulletType = new Dictionary<ResourceType, int>()
+		{
+			{ResourceType.TRIANGLE, 0 },
+			{ResourceType.SQUARE, 1 },
+			{ResourceType.DIAMOND, 2 },
+		};
 
 		private Dictionary<DamageEffectType, DamageEffectTypeData> damageEffectTypeToData = new Dictionary<DamageEffectType, DamageEffectTypeData>();
 
@@ -24,14 +34,21 @@ namespace Overheat.Weapon.Bullet
 			damageEffectTypeToData.Add( DamageEffectType.Explosion, damageEffectTypeData );
 			damageEffectTypeToData.Add( DamageEffectType.Freezing, damageEffectTypeData );
 			damageEffectTypeToData.Add( DamageEffectType.Healing, damageEffectTypeData );
+
+			StartTravel();
 		}
-		private void Update()
+
+		internal void StartTravel()
 		{
-			Debug.Log( "Bullet velocity: " + rb.velocity );
-		}
-		internal void StartTravel( Vector2 moveDirection )
-		{
-			rb.AddForceAtPosition( Vector2.up, gameObject.transform.position );
+			Vector3 mousePosition = Camera.main.ScreenToWorldPoint( Input.mousePosition );
+			mousePosition.z = 0;
+
+			Vector2 shootdirection = ( mousePosition - transform.position ).normalized;
+
+			float angle = Mathf.Atan2( shootdirection.y, shootdirection.x ) * Mathf.Rad2Deg;
+			transform.rotation = Quaternion.Euler( new Vector3( 0, 0, angle ) );
+
+			rb.velocity = shootdirection * data.TravelSpeed;
 		}
 	}
 }

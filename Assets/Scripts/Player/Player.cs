@@ -76,7 +76,6 @@ namespace Overheat.Player
 					case ResourceType.TRIANGLE:
 						Debug.Log( "Triangle Munition" );
 						Instantiate( bullets[0].gameObject, bulletShootPoint.position, Quaternion.identity );
-						bullets[0].gameObject.GetComponent<Bullet>().StartTravel( rotationDirection );
 						RemoveItemfromBackPack();
 						break;
 					case ResourceType.SQUARE:
