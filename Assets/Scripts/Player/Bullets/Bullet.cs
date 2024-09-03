@@ -34,15 +34,7 @@ namespace Overheat.Weapon.Bullet
 
         internal void StartTravel()
 		{
-			Vector3 mousePosition = Camera.main.ScreenToWorldPoint( Input.mousePosition );
-			mousePosition.z = 0;
-
-			Vector2 shootdirection = ( mousePosition - transform.position ).normalized;
-
-			float angle = Mathf.Atan2( shootdirection.y, shootdirection.x ) * Mathf.Rad2Deg;
-			transform.rotation = Quaternion.Euler( new Vector3( 0, 0, angle ) );
-
-			rb.velocity = shootdirection * data.TravelSpeed;
+			rb.velocity = transform.up * data.TravelSpeed;
 		}
 	}
 }

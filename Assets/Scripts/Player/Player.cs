@@ -75,17 +75,17 @@ namespace Overheat.Player
 				{
 					case ResourceType.TRIANGLE:
 						Debug.Log( "Triangle Munition" );
-						Instantiate( bullets[0].gameObject, bulletShootPoint.position, Quaternion.identity );
+						Instantiate( bullets[0].gameObject, bulletShootPoint.position, bulletShootPoint.rotation );
 						RemoveItemfromBackPack();
 						break;
 					case ResourceType.SQUARE:
 						Debug.Log( "Square Munition" );
-						Instantiate( bullets[1].gameObject, bulletShootPoint.position, Quaternion.identity );
+						Instantiate( bullets[1].gameObject, bulletShootPoint.position, bulletShootPoint.rotation);
 						RemoveItemfromBackPack();
 						break;
 					case ResourceType.DIAMOND:
 						Debug.Log( "Diamond Munition" );
-						Instantiate( bullets[2].gameObject, bulletShootPoint.position, Quaternion.identity );
+						Instantiate( bullets[2].gameObject, bulletShootPoint.position, bulletShootPoint.rotation );
 						RemoveItemfromBackPack();
 						break;
 					case ResourceType.NONE:
