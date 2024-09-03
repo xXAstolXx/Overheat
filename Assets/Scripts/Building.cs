@@ -35,16 +35,11 @@ namespace Overheat.Buildings.Base
 
         private void Awake()
         {
-            AddBuildingColorToDict();
+            InitializeBuilding();
         }
 
         void Start()
         {
-            //sprite = GetComponent<SpriteRenderer>();
-            //outerCollider = GetComponent<CircleCollider2D>();
-            //innerCollider = GetComponentInChildren<CircleCollider2D>();
-            //overheatCanvas = GetComponentInChildren<OverheatCanvas>();
-            isOverheated = false;
             switch (buildingData.BuildingType)
             {
                 case ResourceType.TRIANGLE:
@@ -68,6 +63,12 @@ namespace Overheat.Buildings.Base
 
             AddBuildingsToList();
 
+        }
+
+        private void InitializeBuilding()
+        {
+            AddBuildingColorToDict();
+            isOverheated = false;
         }
 
         private void AddBuildingColorToDict()

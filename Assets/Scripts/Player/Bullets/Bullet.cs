@@ -8,9 +8,6 @@ namespace Overheat.Weapon.Bullet
 	internal class Bullet : MonoBehaviour
 	{
 		[SerializeField]
-		private Bullet[] bulletsPrefab = new Bullet[3];
-
-		[SerializeField]
 		private Rigidbody2D rb;
 
 		[SerializeField]
@@ -19,26 +16,23 @@ namespace Overheat.Weapon.Bullet
 		[SerializeField]
 		private DamageEffectTypeData damageEffectTypeData;
 
-		private Dictionary<ResourceType, int> bulletType = new Dictionary<ResourceType, int>()
-		{
-			{ResourceType.TRIANGLE, 0 },
-			{ResourceType.SQUARE, 1 },
-			{ResourceType.DIAMOND, 2 },
-		};
-
 		private Dictionary<DamageEffectType, DamageEffectTypeData> damageEffectTypeToData = new Dictionary<DamageEffectType, DamageEffectTypeData>();
 
 		private void Start()
-		{
-			damageEffectTypeToData.Add( DamageEffectType.Damage, damageEffectTypeData );
-			damageEffectTypeToData.Add( DamageEffectType.Explosion, damageEffectTypeData );
-			damageEffectTypeToData.Add( DamageEffectType.Freezing, damageEffectTypeData );
-			damageEffectTypeToData.Add( DamageEffectType.Healing, damageEffectTypeData );
+        {
+            AddDamageEffectTypeToDataDict();
+            StartTravel();
+        }
 
-			StartTravel();
-		}
+        private void AddDamageEffectTypeToDataDict()
+        {
+            damageEffectTypeToData.Add(DamageEffectType.Damage, damageEffectTypeData);
+            damageEffectTypeToData.Add(DamageEffectType.Explosion, damageEffectTypeData);
+            damageEffectTypeToData.Add(DamageEffectType.Freezing, damageEffectTypeData);
+            damageEffectTypeToData.Add(DamageEffectType.Healing, damageEffectTypeData);
+        }
 
-		internal void StartTravel()
+        internal void StartTravel()
 		{
 			Vector3 mousePosition = Camera.main.ScreenToWorldPoint( Input.mousePosition );
 			mousePosition.z = 0;

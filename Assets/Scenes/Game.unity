@@ -8512,6 +8512,18 @@ PrefabInstance:
       propertyPath: bullets.Array.data[2]
       value: 
       objectReference: {fileID: -4994669560323483157, guid: 0654768506600ba45988cdcd6fe4dc65, type: 3}
+    - target: {fileID: 3607475158928923189, guid: 928328ff9b53f0f4aac663bcc2e77b98, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607475158928923189, guid: 928328ff9b53f0f4aac663bcc2e77b98, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607475158928923189, guid: 928328ff9b53f0f4aac663bcc2e77b98, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
