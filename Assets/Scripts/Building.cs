@@ -5,7 +5,8 @@ namespace Overheat.Buildings.Base
 	using Overheat.Singletons.Game;
 	using Overheat.Ui.WorldUi.OverheatUi;
 	using System;
-	using UnityEngine;
+    using System.Collections.Generic;
+    using UnityEngine;
 	using Random = UnityEngine.Random;
 
 	internal class Building : MonoBehaviour
@@ -15,53 +16,68 @@ namespace Overheat.Buildings.Base
 
 		[SerializeField]
 		private ResourceType coolingResourceType;
-
+		[SerializeField]
 		private SpriteRenderer sprite;
 		private bool isGenerating;
 
+		[SerializeField]
 		private CircleCollider2D outerCollider;
 		[SerializeField]
 		private CircleCollider2D innerCollider;
 
 		[SerializeField]
 		private float currentHeat = 0;
+		[SerializeField]
 		private OverheatCanvas overheatCanvas;
-		private OverheatImage overheatImage;
 		internal bool isOverheated { get; private set; }
 
-		void Start()
-		{
-			sprite = GetComponent<SpriteRenderer>();
-			outerCollider = GetComponent<CircleCollider2D>();
-			innerCollider = GetComponentInChildren<CircleCollider2D>();
-			overheatCanvas = GetComponentInChildren<OverheatCanvas>();
-			overheatImage = GetComponentInChildren<OverheatImage>();
-			isOverheated = false;
-			switch( buildingData.BuildingType )
-			{
-				case ResourceType.TRIANGLE:
-					sprite.color = buildingData.TriangleBuildingColor;
-					TickSystem( buildingData.Ticks );
-					break;
-				case ResourceType.SQUARE:
-					sprite.color = buildingData.SquareBuildingColor;
-					TickSystem( buildingData.Ticks );
-					break;
-				case ResourceType.DIAMOND:
-					sprite.color = buildingData.DiamondBuildingColor;
-					TickSystem( buildingData.Ticks );
-					break;
-				default:
-				case ResourceType.NONE:
-					sprite.color = Color.magenta;
-					throw new NotImplementedException( "none BuildingData Assigned" );
+		private Dictionary<ResourceType, Color> buildingColors = new Dictionary<ResourceType, Color>();
 
-			}
+        private void Awake()
+        {
+            AddBuildingColorToDict();
+        }
 
-			AddBuildingsToList();
+        void Start()
+        {
+            //sprite = GetComponent<SpriteRenderer>();
+            //outerCollider = GetComponent<CircleCollider2D>();
+            //innerCollider = GetComponentInChildren<CircleCollider2D>();
+            //overheatCanvas = GetComponentInChildren<OverheatCanvas>();
+            isOverheated = false;
+            switch (buildingData.BuildingType)
+            {
+                case ResourceType.TRIANGLE:
+					sprite.color = buildingColors[ResourceType.TRIANGLE];
+                    TickSystem(buildingData.Ticks);
+                    break;
+                case ResourceType.SQUARE:
+					sprite.color = buildingColors[ResourceType.SQUARE];
+                    TickSystem(buildingData.Ticks);
+                    break;
+                case ResourceType.DIAMOND:
+					sprite.color = buildingColors[ResourceType.DIAMOND];
+                    TickSystem(buildingData.Ticks);
+                    break;
+                default:
+                case ResourceType.NONE:
+                    sprite.color = Color.magenta;
+                    throw new NotImplementedException("none BuildingData Assigned");
 
-		}
-		private void Update()
+            }
+
+            AddBuildingsToList();
+
+        }
+
+        private void AddBuildingColorToDict()
+        {
+            buildingColors.Add(ResourceType.TRIANGLE, buildingData.TriangleBuildingColor);
+            buildingColors.Add(ResourceType.SQUARE, buildingData.SquareBuildingColor);
+            buildingColors.Add(ResourceType.DIAMOND, buildingData.DiamondBuildingColor);
+        }
+
+        private void Update()
 		{
 			currentHeat = overheatCanvas.GetOverHeatAmount();
 		}

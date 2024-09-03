@@ -269,7 +269,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
 --- !u!1 &7781344520115792666
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +345,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 349910213
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 2747690628134850419, guid: 16037dbd798344f57a526d53d48f5ead, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -372,8 +372,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingData: {fileID: 11400000, guid: e041618ab25fe6949aef219b37057ed8, type: 2}
   coolingResourceType: 10
+  sprite: {fileID: 3181774688439360777}
+  outerCollider: {fileID: 6614943887002302880}
   innerCollider: {fileID: 581251763793000084}
   currentHeat: 0
+  overheatCanvas: {fileID: 5960096241880625514}
 --- !u!58 &6614943887002302880
 CircleCollider2D:
   m_ObjectHideFlags: 0

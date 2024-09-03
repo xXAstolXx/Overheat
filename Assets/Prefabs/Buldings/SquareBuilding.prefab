@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 349910213
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -102,8 +102,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingData: {fileID: 11400000, guid: cc409e1719c889b4fb2c1c0fcf45b27c, type: 2}
   coolingResourceType: 0
+  sprite: {fileID: 6882077979066009001}
+  outerCollider: {fileID: 228943276916381701}
   innerCollider: {fileID: 326820247899097972}
   currentHeat: 0
+  overheatCanvas: {fileID: 5105001884362802144}
 --- !u!58 &228943276916381701
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -205,7 +208,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
 --- !u!1 &5467398549047395434
 GameObject:
   m_ObjectHideFlags: 0
