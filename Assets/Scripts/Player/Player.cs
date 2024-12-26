@@ -1,6 +1,7 @@
 namespace Overheat.Player
 {
-	using Overheat.Interaction.Interactable;
+    using Overheat.Extensions.ListExtensions;
+    using Overheat.Interaction.Interactable;
 	using Overheat.Player.InteractionSystem.Collect;
 	using Overheat.Player.InventorySystem;
 	using Overheat.Weapon.Bullet;
@@ -71,21 +72,13 @@ namespace Overheat.Player
 		{
 			if( backPack.ressourceDatas.Count >= backPack.MaxCapacity )
 			{
-				switch( backPack.ressourceDatas[0].Type )
+				var firstItemInBackpack = backPack.ressourceDatas.GetFirstOrDefault();
+				switch( firstItemInBackpack.Type )
 				{
 					case ResourceType.TRIANGLE:
-						Debug.Log( "Triangle Munition" );
-						Instantiate( bullets[0].gameObject, bulletShootPoint.position, bulletShootPoint.rotation );
-						RemoveItemfromBackPack();
-						break;
 					case ResourceType.SQUARE:
-						Debug.Log( "Square Munition" );
-						Instantiate( bullets[1].gameObject, bulletShootPoint.position, bulletShootPoint.rotation);
-						RemoveItemfromBackPack();
-						break;
 					case ResourceType.DIAMOND:
-						Debug.Log( "Diamond Munition" );
-						Instantiate( bullets[2].gameObject, bulletShootPoint.position, bulletShootPoint.rotation );
+						HandleResource(firstItemInBackpack.Type);
 						RemoveItemfromBackPack();
 						break;
 					case ResourceType.NONE:
@@ -94,6 +87,23 @@ namespace Overheat.Player
 				}
 			}
 
+		}
+
+		private void HandleResource( ResourceType resourceType )
+		{
+			int bulletIndex = resourceType switch
+            {
+                ResourceType.TRIANGLE => 0,
+                ResourceType.SQUARE => 1,
+                ResourceType.DIAMOND => 2,
+                _ => -1,
+            };
+
+			if(bulletIndex >= 0 && bulletIndex < bullets.Length)
+			{
+                Debug.Log($"Munition Type: {resourceType}");
+                Instantiate( bullets[bulletIndex].gameObject, bulletShootPoint.position, bulletShootPoint.rotation);
+			}
 		}
 
 		#region Collect Resource
