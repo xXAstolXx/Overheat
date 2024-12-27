@@ -11,6 +11,7 @@ namespace Overheat.Player.InputKeybindings
 		private InputAction moving;
 		private InputAction shoot;
 
+		[SerializeField]
 		private Player player;
 
 		private void Awake()
@@ -18,8 +19,6 @@ namespace Overheat.Player.InputKeybindings
 			playerInputActions = new PlayerControls();
 			moving = playerInputActions.Keyboard.Moving;
 			shoot = playerInputActions.Keyboard.Shoot;
-
-			player = GetComponent<Player>();
 		}
 
 		private void OnEnable()
